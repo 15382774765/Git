@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实训管理</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery-2.1.4.js"></script>
+
+    <!-- yanyo -->
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+
+    <!-- 新版时间轴 -->
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<style>
+    * {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #CFCCCC;
+    }
+
+    /* --------------- 顶部 --------------- */
+
+    /* 顶部导航栏 */
+    #top {
+        height: 50px;
+    }
+
+    /* --------------- 主体 --------------- */
+
+    /* 主体栏左侧 */
+    #left {
+        background-color: #1C758A;
+    }
+
+    /* 主体栏右侧 */
+    #right {
+    }
+
+    /* 项目标题 */
+    #projectTitle {
+    }
+
+    /* 项目名 */
+    #projectName {
+    }
+
+    /* JAVA */
+    #JAVA {
+        background: #00bbb5;
+        padding: 2px 10px;
+        border-radius: 10px;
+        font-size: 12px;
+        color: white;
+    }
+
+    /* 文件上传 */
+    #uploadFile {
+    }
+
+    /* 项目描述 */
+    #projectDescribe {
+    }
+
+    /* 项目模块 */
+    #projectModular {
+    }
+
+    /* --------------- 底部 --------------- */
+
+    /* 底部 */
+    #bottom {
+        height: 280px;
+        background-color: #EAEAEA;
+    }
+
+    .baseBot-box {
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 100px;
+        border-radius: 0px;
+        border: 0px;
+        margin-top: 100px;
+        overflow: hidden;
+        background-color: inherit;
+    }
+
+    .baseBot-vline {
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 1px;
+        height: 16px;
+        line-height: 16px;
+        background-color: rgb(170, 170, 170);
+    }
+
+    .baseBot-hline {
+        font-size: 14px;
+        width: 90%;
+        height: 1px;
+        line-height: 1px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 4px;
+        background-color: rgb(170, 170, 170)
+    }
+
+    .baseBot-item {
+        color: #666;
+        font-size: 12px;
+        display: inline-block;
+        width: 120px;
+        text-align: center;
+    }
+
+    .baseBot-txt {
+        font-size: 12px;
+        margin-top: -6px;
+        color: rgb(136, 136, 136);
+    }
+
+</style>
+
+<body>
+
+<!-- 顶部导航栏 -->
+<div id="top" class="container-fluid">
+    <div class="row">
+    </div>
+</div>
+
+<!-- 主体栏 -->
+<div class="container-fluid">
+
+    <!-- 主体栏行 -->
+    <div class="row">
+
+        <!-- 主体栏左侧 -->
+        <div id="left" class="col-md-7">
+
+            <!-- 项目标题 -->
+            <div id="projectTitle" class="row" style="position: relative; top:45px; right:20px;">
+
+                <!-- 项目名 -->
+                <div id="projectName" class="col-md-8 col-md-offset-1">
+
+                    <!-- 图片 -->
+                    <div class="col-md-2" style="position: relative;right:30px;">
+                        <img src="../images/titleLogo.png" class="img-rounded">
+                    </div>
+
+                    <!-- 文字 -->
+                    <div class="col-md-9 col-md-push-1" style="margin-left:10px; color: white;">
+                        <span id="JAVA" ng-bind="tecdir" class="ng-binding">JAVA</span>
+
+                        <h2 style="position: relative;bottom: 15px;">
+                            <strong>基于大数据分析的日常开销统计工具</strong>
+                        </h2>
+
+                        <p style="position: relative;bottom: 25px;">
+                            距离课程截止日期还有<span ng-bind="timeover" class="ng-binding">27</span>天<span
+                                ng-click="changedataboxhide()" class="glyphicon glyphicon-calendar"
+                                style="margin-left:10px;cursor:pointer;"></span>
+                            <a href="../misold/projectreportpaper.html?projectid=2029"
+                               style="font-size: 12px;color: #fff;opacity: 0.7;">[文档]</a>
+                            <a href="../misold/projecttestpaper.html?projectid=2029"
+                               style="font-size: 12px;color: #fff;opacity: 0.7;">[打印测试页]</a>
+                            <!-- 已经完成<span ng-bind="sblocks_done"></span>/<span ng-bind="blocks_length"></span>模块，<span ng-bind="stasks_done"></span>/<span ng-bind="tasks_length"></span>任务 -->
+                        </p>
+
+                        <!-- 模块完成度 -->
+                        <p>
+
+                        <div style="position: relative;bottom: 30px;" class="progress ng-isolate-scope" animate="false"
+                             value="getper(sblocks_done,blocks_length)" type="success">
+                            <div class="progress-bar progress-bar-success"
+                                 ng-class="type &amp;&amp; 'progress-bar-' + type" role="progressbar" aria-valuenow="44"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 ng-style="{width: (percent < 100 ? percent : 100) + '%'}" aria-valuetext="44%"
+                                 style="background-color:#00BBB5;min-width: 0px; transition: none; width: 44%;"
+                                 ng-transclude="">
+                                <b style="color:white; white-space:nowrap;margin-left: 6px;"
+                                   class="ng-binding ng-scope">
+                                    已完成4/9模块
+                                </b>
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 文件上传 -->
+                <div id="uploadFile" class="col-md-2" style="color:white;font-size: 20px;">
+                    上传文件<br/><br/>
+
+                    <div class="row" style="">
+                        <div class="col-md-12">
+                            <button class="btn btn-warning" id="scheduledocup"
+                                    style="font-size: 12px; background: #00BBB5; border: none; width: 160px; margin-bottom: 5px;"
+                                    ng-click="$root.uploadFile(2,$event,docresfn,'dd')">选题报告（doc文件）
+                            </button>
+                            <!-- ngRepeat: up in $root.uploaded.scheduledocup track by $index -->
+                        </div>
+                    </div>
+                    <div class="row" style="">
+                        <div class="col-md-12">
+                            <button class="btn btn-warning" id="schedulefileup"
+                                    style="font-size: 12px; background: #00BBB5; border: none; width: 160px; margin-bottom: 5px;"
+                                    ng-click="$root.uploadFile(2,$event,fileresfn,'dd')">项目文件包（rar/zip文件）
+                            </button>
+                            <!-- ngRepeat: up in $root.uploaded.schedulefileup track by $index -->
+                        </div>
+                    </div>
+                    <div class="row" style=""
+                         ng-show="zxsch.author.id == baseTopCtrlr.user.id">
+                        <div class="col-md-12">
+                            <button class="btn btn-warning" id="schedulemp4up"
+                                    style="font-size: 12px; background: #00BBB5; border: none; width: 160px; margin-bottom: 5px;"
+                                    ng-click="$root.uploadFile(3,$event,mp4resfn,'dd')">上传答辩视频（mp4文件）
+                            </button>
+                            <!-- ngRepeat: up in $root.uploaded.schedulemp4up track by $index -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 项目描述 -->
+            <div id="projectDescribe" class="row">
+                <div class="panel-group col-md-11" id="accordion" role="tablist"
+                     aria-multiselectable="true" style="position:relative; top: 20px; left: 30px;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse"
+                                   data-parent="#accordion" href="#collapseOne"
+                                   aria-expanded="true" aria-controls="collapseOne"
+                                   style="font-size: 12px;display:block;text-decoration:none;"> 项目简介 </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in"
+                             role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">Anim pariatur cliche
+                                reprehenderit, enim eiusmod high life accusamus
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse"
+                                   data-parent="#accordion" href="#collapseTwo"
+                                   aria-expanded="false" aria-controls="collapseTwo"
+                                   style="font-size: 12px;display:block;text-decoration:none;"> 界面截图 </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse"
+                             role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">Anim pariatur cliche
+                                reprehenderit, enim eiusmod high life .
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse"
+                                   data-parent="#accordion" href="#collapseThree"
+                                   aria-expanded="false" aria-controls="collapseThree"
+                                   style="font-size: 12px;display:block;text-decoration:none;"> 相关文件 </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse"
+                             role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">Anim pariatur cliche
+                                reprehenderit, enim eiusmod high life
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse"
+                                   data-parent="#accordion" href="#collapseFour"
+                                   aria-expanded="false" aria-controls="collapseFour"
+                                   style="font-size: 12px;display:block;text-decoration:none;"> 前置课程与工具下载 </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse"
+                             role="tabpanel" aria-labelledby="headingFour">
+                            <div class="panel-body">Anim pariatur cliche
+                                reprehenderit, enim eiusmod high life
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 项目模块 -->
+            <div id="projectModular" class="row">
+
+                <div class="content">
+                    <div class="wrapper">
+
+                        <!-- 总板块 -->
+                        <div class="main">
+                            <!-- 板块名称 -->
+                            <h1 class="title">项目进度</h1>
+
+                            <!-- 1．系统功能分析 -->
+                            <div class="year closeYear">
+                                <h2><a href="#">1．系统功能分析<i></i></a></h2>
+
+                                <div class="list">
+                                    <ul>
+                                        <!-- 模块详情 -->
+                                        <li class="cls highlight">
+                                            <p class="date">模块详情</p>
+
+                                            <div class="more">
+                                                <p>对系统做到全方面的分析，包括：开发平台与环境熟悉，准备的技术与建议参考资料，数据库设计，功能模块了解。</p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 相关资料 -->
+                                        <li class="cls">
+                                            <p class="date">相关资料</p>
+
+                                            <div class="more">
+                                                <p>
+                                                <dd ng-repeat="i in blocks[$index].files" class="ng-scope"><a
+                                                        ng-href="http://7xnmfe.com1.z0.glb.clouddn.com/2016-02-19-09-52-12【相关模板文件】数据库设计与实现.doc"
+                                                        style="color:#E5F42F;" class="ng-binding"
+                                                        href="http://7xnmfe.com1.z0.glb.clouddn.com/2016-02-19-09-52-12【相关模板文件】数据库设计与实现.doc"><span
+                                                        class="glyphicon glyphicon-expand"></span>【相关模板文件】数据库设计与实现.doc</a>
+                                                </dd>
+                                                </p>
+                                                <p>
+                                                <dd ng-repeat="i in blocks[$index].files" class="ng-scope"><a
+                                                        ng-href="http://7xnmfe.com1.z0.glb.clouddn.com/2016-02-19-09-52-18【相关模板文件】需求说明书.doc"
+                                                        style="color:#E5F42F;" class="ng-binding"
+                                                        href="http://7xnmfe.com1.z0.glb.clouddn.com/2016-02-19-09-52-18【相关模板文件】需求说明书.doc"><span
+                                                        class="glyphicon glyphicon-expand"></span>【相关模板文件】需求说明书.doc</a>
+                                                </dd>
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 1 -->
+                                        <li class="cls">
+                                            <p class="date">任务模块</p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;1．开发平台与环境
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    系统环境：支持Jdk6.0+，Tomcat6.0+<br/>
+                                                    开发工具：Eclipse/MyEclipse<br/>
+                                                    数据库： MySql5.6<br/>
+                                                    软件架构：B/S 架构，MVC三层开发
+                                                </p>
+                                                <img class="img-rounded col-md-offset-1"
+                                                     src="../images/timeAxis/modular-1-1.png">
+                                                &nbsp;
+                                                <img class="img-rounded" src="../images/timeAxis/modular-1-2.png">
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 2 -->
+                                        <li class="cls">
+                                            <p class="date"></p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;2．准备与建议
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    1. 技术要求<br/>
+                                                    (1)
+                                                    深刻理解JavaWeb相关技术，熟练使用tomcat、jboss、weblogic等应用服务器至少一种，熟练掌握标准sql语句使用。<br/>
+                                                    (2) 具体技术有：JavaSE、Jdbc、Servlet、Jsp、El、Jstl、Html、Css、JavaScript、JQuery
+                                                    等。<br/>
+                                                    (3) 推荐在线学习平台：http://www.geminno.cn。<br/>
+                                                    <br/>
+                                                    2. 资料素材<br/>
+                                                    《Java编程思想》，《深入分析Java
+                                                    Web技术内幕》，《JavaScript高级编程》，《Ajax基础教程》，《设计模式——可复用的面向对象设计》，《锋利的jQuery》
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 3 -->
+                                        <li class="cls">
+                                            <p class="date"></p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;3．数据库设计
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    包括分析实体，标识实体属性，找出实体之间关系，绘出E-R图，使用范式规范化，建库，建表，建约束，输入测试数据。
+                                                </p>
+                                                <img class="img-rounded col-md-offset-1"
+                                                     src="../images/timeAxis/modular-1-3.png">
+                                            </div>
+                                        </li>
+
+
+                                        <!-- 任务模块 - 4 -->
+                                        <li class="cls">
+                                            <p class="date"></p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;4．功能模块说明
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    本工具平台，具体包括如下几个主要功能：<br/>
+                                                    1. 注册、登陆模块：用户在线注册账号，登录后可以进入系统首页<br/>
+                                                    2. 企业模块：主要是管理企业相关的部门信息。包含：企业信息、部门管理等。<br/>
+                                                    3. 个人模块：主要统计个人开销记录。包含：个人信息、个人统计等。<br/>
+                                                    4. 统计中心：主要针对企业进行统计，可以根据不同时间、不同部门、不同类型等统计。
+                                                </p>
+                                                <img class="img-rounded col-md-offset-1"
+                                                     src="../images/timeAxis/modular-1-4.png">
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 5 -->
+                                        <li class="cls">
+                                            <p class="date"></p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;5．完成需求说明书
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    此任务是以后毕业论文中的一部分，现在提交完成，以后的事情。你懂得。。。。。。。。。
+                                                    （提示：可下载需求说明书模板进行书写）
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- 2．编程规范说明 -->
+                            <div class="year closeYear">
+                                <h2><a href="#">2．编程规范说明<i></i></a></h2>
+
+                                <div class="list">
+                                    <ul>
+                                        <!-- 模块详情 -->
+                                        <li class="cls highlight">
+                                            <p class="date">模块详情</p>
+
+                                            <div class="more">
+                                                <p>
+                                                    1. 方便代码的交流和维护。<br/>
+                                                    2. 不影响编码的效率，不与大众习惯冲突。<br/>
+                                                    3. 使代码更美观、阅读更方便。<br/>
+                                                    4. 使代码的逻辑更清晰、更易于理解。
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 1 -->
+                                        <li class="cls">
+                                            <p class="date">任务模块</p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;1．术语定义
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    1. Pascal
+                                                    方法：将标识符的首字母和后面连接的每个单词的首字母都大写。可以对三字符或更多字符的标识符使用。例如：BackColor<br/>
+                                                    2. Camel 方法：标识符的首字母小写，而每个后面连接的单词的首字母都大写。例如:backColor
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 2 -->
+                                        <li class="cls">
+                                            <p class="date"></p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;2．包结构的命名规范
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    包结构：cn.公司名.项目名.三层结构划分、工具包、领域模型包<br/>
+                                                    例如：<br/>
+                                                    cn.geminno.count.web<br/>
+                                                    cn.geminno.count.service<br/>
+                                                    cn.geminno.count.dao<br/>
+                                                    cn.geminno.count.domain<br/>
+                                                    cn.geminno.count.utils
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- 3．注册登录模块 -->
+                            <div class="year closeYear">
+                                <h2><a href="#">3．注册登录模块<i></i></a></h2>
+
+                                <div class="list">
+                                    <ul>
+                                        <!-- 模块详情 -->
+                                        <li class="cls highlight">
+                                            <p class="date">模块详情</p>
+
+                                            <div class="more">
+                                                <p>
+                                                    注册分为个人注册和企业注册，只有登陆成功后，才能使用工具统计。
+                                                </p>
+                                                <img class="img-rounded" src="../images/timeAxis/modular-3.png">
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 1 -->
+                                        <li class="cls">
+                                            <p class="date">任务模块</p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;1．实现思路
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    1. 注册:<br/>
+                                                    (1) 游客点击注册按钮，弹出注册页面<br/>
+                                                    (2) 填写信息，确认提交<br/>
+                                                    (3) 后台接受提交数据，调用dao层验证信息是否有效<br/>
+                                                    (4) 注册成功，自动登录；注册失败，继续注册<br/>
+                                                    <br/>
+                                                    2. 登录:<br/>
+                                                    (1) 用户点击登录按钮，弹出登录页面<br/>
+                                                    (2) 填写用户名、密码等信息<br/>
+                                                    (3) 后台接受登录信息，调用dao层判断登录是否成功<br/>
+                                                    (4) 登录成功，进入我的地盘；登录失败，继续登录
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 2 -->
+                                        <li class="cls">
+                                            <p class="date"></p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;2．技术难点解析
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    验证码:现在几乎所有网站或系统，为了保证项目的安全性，通常都要使用到验证码；特别是在进行注册、登陆的时候，它能够防止程序恶意刷新提交。验证码实现的时候要注意两个方面：<br/>
+                                                    1. 后台实现<br/>
+                                                    (1) 通过随机数生成验证码值，并且把数值存放在session 的域内。<br/>
+                                                    (2) 使用swing画成一张图片，把图片以输出流的方式，反馈给前台。<br/>
+                                                    <br/>
+                                                    2. 前台实现<br/>
+                                                    (1) 在页面中通过&lt;img src=” ”&gt;标签，引入验证码图片<br/>
+                                                    (2) 在更换验证码的时候，需要在请求链接中加入随机数，防止浏览器缓存。<br/>
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- 4．企业模块 -->
+                            <div class="year closeYear">
+                                <h2><a href="#">4．企业模块<i></i></a></h2>
+
+                                <div class="list">
+                                    <ul>
+                                        <!-- 模块详情 -->
+                                        <li class="cls highlight">
+                                            <p class="date">模块详情</p>
+
+                                            <div class="more">
+                                                <p>
+                                                    本模块主要包括：企业信息、企业部门管理等多个内容。<br/>
+                                                    提示：该模块主要是为了后面针对企业进行统计的时候，做一些设置。
+                                                </p>
+                                                <img class="img-rounded" src="../images/timeAxis/modular-4.png">
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 1 -->
+                                        <li class="cls">
+                                            <p class="date">任务模块</p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;1．实现思路
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    企业会员登陆成功后，可以修改、完善企业的部分信息，同时也能够对企业的部门进行增删改查。<br/>
+                                                    这边的部门管理主要是为了后面针对企业统计进行准备。
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 2 -->
+                                        <li class="cls">
+                                            <p class="date"></p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;2．技术难点解析
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    1.分页实现：主要的目的是为了提高系统性能和页面展现友好，目前主要分为两种方式：<br/>
+                                                    (1) 逻辑分页：一次性从数据库拿出多个数据，缓存在内存中，每次根据分页请求取出当前页面数据。<br/>
+                                                    *** 一般逻辑分页用在数据量较少的时候。<br/>
+                                                    (2) 物理分页：根据分页请求从数据库中取出当前页的数据，该技术是由数据库自身提供，程序只需要提供要求即可。<br/>
+                                                    *** 在数据量比较大的时候，一定要采用物理分页，否则会导致数据库吞吐量过大，性能急剧下降，甚至宕机的可能。<br/>
+                                                    <br/>
+                                                    注意:项目较为庞大的时候，一般采用两者有效结合的方式，一次性从数据库取出相当量的数据（不是全部），然后再根据分页请求，响应当前页面数据。<br/>
+                                                    <br/>
+                                                    2.分页模型：为了能够更好描述分页请求的信息和其它地方的复用，通常会抽取出分页模型，以避免代码重复冗余。在抽取模型的时候，要注意问题的归纳、分析，一般抓住不常变的信息，灵活处理变化的信息，例如：<br/>
+                                                    <br/>
+                                                    不变的：一页显示几条记录，总记录数，<br/>
+                                                    变的：当前页，总页数<br/>
+                                                    <br/>
+                                                    抽取出来的模型对象PageModel：<br/>
+                                                    一页显示几条记录：pageContent，<br/>
+                                                    当前页：pageCurrent，<br/>
+                                                    总记录数：totalNum，<br/>
+                                                    总页数：totalPage=totalNum/pageContent (根据需要是否 +1)
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- 5．个人模块 -->
+                            <div class="year closeYear">
+                                <h2><a href="#">5．个人模块<i></i></a></h2>
+
+                                <div class="list">
+                                    <ul>
+                                        <!-- 模块详情 -->
+                                        <li class="cls highlight">
+                                            <p class="date">模块详情</p>
+
+                                            <div class="more">
+                                                <p>
+                                                    主要是完善会员个人的详细的信息，特别是记录了会员学了哪些课程，达到了什么样水平，想学哪些课程等。系统根据会员的信息和对学员学习轨迹的跟踪、分析，推荐出更有针对性的课程。
+                                                </p>
+                                                <img class="img-rounded"
+                                                     src="../images/timeAxis/modular-5.png">
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 1 -->
+                                        <li class="cls">
+                                            <p class="date">任务模块</p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;1．实现思路
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    会员登录后，可以直接进入个人模块，在该模块内有完善个人信息的功能，也能够根据自己的开销记录进行统计，一般包括：按时间统计，类型统计等。
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 2 -->
+                                        <li class="cls">
+                                            <p class="date"></p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;2．技术难点解析
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    1. 分页技术见上章节分析<br/>
+                                                    2. Excel导出：参见【项目相关技术资料】java生成excel.doc<br/>
+                                                    3. Pdf导出：参见【项目相关技术资料】java生成pdf.doc<br/>
+                                                    4. 图形生成：参见【项目相关技术资料】java生成统计图形.doc
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- 6．统计中心模块 -->
+                            <div class="year closeYear">
+                                <h2><a href="#">6．统计中心模块<i></i></a></h2>
+
+                                <div class="list">
+                                    <ul>
+                                        <!-- 模块详情 -->
+                                        <li class="cls highlight">
+                                            <p class="date">模块详情</p>
+
+                                            <div class="more">
+                                                <p>
+                                                    企业会员登录后，可以查询统计模块，该模块包括：按时间统计，按部门统计，按类型统计等多种方式。 </p>
+                                                <img class="img-rounded"
+                                                     src="../images/timeAxis/modular-6.png">
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 1 -->
+                                        <li class="cls">
+                                            <p class="date">任务模块</p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;1．实现思路
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    该功能主要是针对企业日常开销进行统计的。企业会员登录后，设置好部门等相关信息后，可以到统计中心查看各方面的统计信息，例如：企业统计，部门统计，类型统计，也可以根据不同时间段进行统计等。
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 2 -->
+                                        <li class="cls">
+                                            <p class="date"></p>
+
+                                            <p class="intro">
+                                                <span
+                                                        class="about-task-icon glyphicon glyphicon-remove-circle modularFinish"
+                                                        ng-class="(task.mstasksstate==5)?'glyphicon glyphicon-ok-circle':'glyphicon glyphicon-remove-circle'"
+                                                        ng-click="clicktaskState(task,blocks[$index])"
+                                                        oid="task.tid"></span>
+                                                &nbsp;2．技术难点解析
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                                <p class="col-md-offset-1">
+                                                    1. 分页技术见上章节分析<br/>
+                                                    2. Excel导出：参见【项目相关技术资料】java生成excel.doc<br/>
+                                                    3. Pdf导出：参见【项目相关技术资料】java生成pdf.doc<br/>
+                                                    4. 图形生成：参见【项目相关技术资料】java生成统计图形.doc
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- 7．扩展性功能 -->
+                            <div class="year closeYear">
+                                <h2><a href="#">7．扩展性功能<i></i></a></h2>
+
+                                <div class="list">
+                                    <ul>
+                                        <!-- 模块详情 -->
+                                        <li class="cls highlight">
+                                            <p class="date">模块详情</p>
+
+                                            <div class="more">
+                                                <p>
+                                                    1. 同行了解<br/>
+                                                    (1) 能够根据大数据查询同行其它的粗略统计。<br/>
+                                                    2. 教你节省<br/>
+                                                    (1) 提供节省开支方案。
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 1 -->
+                                        <li class="cls">
+                                            <p class="date">任务模块</p>
+
+                                            <p class="intro">
+                                                &nbsp;暂无
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- 8．提交项目成果 -->
+                            <div class="year closeYear">
+                                <h2><a href="#">8．提交项目成果<i></i></a></h2>
+
+                                <div class="list">
+                                    <ul>
+                                        <!-- 模块详情 -->
+                                        <li class="cls highlight">
+                                            <p class="date">模块详情</p>
+
+                                            <div class="more">
+                                                <p>
+                                                    1 提交项目完整代码 (提示：包括源代码，数据库脚本，或者数据库文件)<br/>
+                                                    2 提交项目演示视频 (提示：通过录屏软件，录制成mp4或是其它可播放格式，演示项目全部模块的过程，参考下载链接)<br/>
+                                                    3 提交项目相关文档 (提示：包括需求说明书，用户操作手册，数据库设计文档，参考下载文档格式)<br/>
+                                                    4 规范化相关文件的文件名
+                                            </div>
+                                        </li>
+
+                                        <!-- 相关课程 -->
+                                        <li class="cls">
+                                            <p class="date">相关课程</p>
+
+                                            <div class="more">
+                                                <p>
+                                                <dd ng-repeat="c in blocks[$index].courses" class="ng-scope"><a
+                                                        ng-href="https://yunpan.cn/OcxSzpQExqKP33"
+                                                        style="color:#E5F42F;" class="ng-binding"
+                                                        href="https://yunpan.cn/OcxSzpQExqKP33"><span
+                                                        class="glyphicon glyphicon-expand"></span>【辅助工具下载】Mac系统如何录制屏幕（访问密码
+                                                    5c2b）</a>
+                                                </dd>
+                                                </p>
+                                                <p>
+                                                <dd ng-repeat="c in blocks[$index].courses" class="ng-scope"><a
+                                                        ng-href="https://yunpan.cn/OcxSzIrxwWgMNB"
+                                                        style="color:#E5F42F;" class="ng-binding"
+                                                        href="https://yunpan.cn/OcxSzIrxwWgMNB"><span
+                                                        class="glyphicon glyphicon-expand"></span>【辅助工具下载】Win7和Win8自带的屏幕录制功能（访问密码
+                                                    3488）</a>
+                                                </dd>
+                                                </p>
+                                                <p>
+                                                <dd ng-repeat="c in blocks[$index].courses" class="ng-scope"><a
+                                                        ng-href="https://yunpan.cn/OcxSzidDHY6h6A"
+                                                        style="color:#E5F42F;" class="ng-binding"
+                                                        href="https://yunpan.cn/OcxSzidDHY6h6A"><span
+                                                        class="glyphicon glyphicon-expand"></span>【辅助工具下载】Win10中自带的录屏工具-xbox录屏软件（访问密码
+                                                    4298）</a>
+                                                </dd>
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 相关资料 -->
+                                        <li class="cls">
+                                            <p class="date">相关资料</p>
+
+                                            <div class="more">
+                                                <p>
+                                                <dd ng-repeat="i in blocks[$index].files" class="ng-scope"><a
+                                                        ng-href="http://7xnmfe.com1.z0.glb.clouddn.com/2016-02-19-09-56-37【相关模板文件】用户操作手册.doc"
+                                                        style="color:#E5F42F;" class="ng-binding"
+                                                        href="http://7xnmfe.com1.z0.glb.clouddn.com/2016-02-19-09-56-37【相关模板文件】用户操作手册.doc"><span
+                                                        class="glyphicon glyphicon-expand"></span>【相关模板文件】用户操作手册.doc</a>
+                                                </dd>
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 1 -->
+                                        <li class="cls">
+                                            <p class="date">任务模块</p>
+
+                                            <p class="intro">
+                                                &nbsp;暂无
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- 9．完成毕业论文 -->
+                            <div class="year closeYear">
+                                <h2><a href="#">9．完成毕业论文<i></i></a></h2>
+
+                                <div class="list">
+                                    <ul>
+                                        <!-- 模块详情 -->
+                                        <li class="cls highlight">
+                                            <p class="date">模块详情</p>
+
+                                            <div class="more">
+                                                <p>
+                                                    1.按照学校要求的毕业论文格式完成自己的毕业论文。<br/>
+                                                    2.提交毕业论文到项目工场，学习暂告结束。
+                                            </div>
+                                        </li>
+
+                                        <!-- 任务模块 - 1 -->
+                                        <li class="cls">
+                                            <p class="date">任务模块</p>
+
+                                            <p class="intro">
+                                                &nbsp;暂无
+                                            </p>
+
+                                            <p class="version">&nbsp;</p>
+
+                                            <div class="more">
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 主体栏右侧 -->
+        <div id="right" class="col-md-5">
+
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab"> 小诺互动</a></li>
+                <li><a href="#ios" data-toggle="tab">问题库</a></li>
+                <li><a href="#jmeter" data-toggle="tab">下资料</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="home">
+                    <p><br/>
+                        W3Cschoool菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="ios">
+                    <div class="span3 col-md-4"
+                         style="margin-top: 30px; position: relative; left: -13.5px;">
+                        <a href="#" class="btn btn-large btn-block btn-danger"><span
+                                style="left: -30px; position: relative;"
+                                class="glyphicon glyphicon-plus"></span>问专家</a>
+                    </div>
+
+                    <div class="btn-group col-md-pull-4" style="margin-top: 100px;">
+                        <button type="button" class="btn btn-default">项目问题库</button>
+                        <button type="button" class="btn btn-default">我提出的</button>
+                        <button type="button" class="btn btn-default">我回复的</button>
+                    </div>
+
+                    <div class="control-group"
+                         style="position: relative; left: 305px; bottom: 35px; width: 200px;">
+                        <div class="controls">
+                            <div class="form-group input-group">
+                                <input type="text" placeholder="搜索标题" class="form-control">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button"><i
+                                                        class="glyphicon glyphicon-search"></i>
+                                                </button>
+                                            </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <ul class="pagination" style="position: relative;bottom: 50px;">
+                        <li><a href="#">&laquo;</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+
+                    <!-- 所有面板 -->
+                    <div style="position: relative;bottom: 60px;">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">局部内部类：怎么访问方法下的变量</h3>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td style="font-size: 10px;">
+                                        <a href="#" style="text-decoration:none;">
+                                        <span class="author ng-binding" ng-click="UserPage(faq.ask.authorid)">
+                                             <img class="img-rounded" style="width: 20px;height: 20px"
+                                                  ng-src="../images/panelLogo.jpg" src="../images/panelLogo.jpg">&nbsp;&gt;.&lt;
+                                        </span>
+                                        </a>
+                                        <span style="color:grey;">发布于 2016-06-02 16:40:09</span>
+                                        <span style="color:grey;float: right;">3个跟帖</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="panel panel-info" style="margin-top: -10px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">实例化流时出现异常</h3>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td style="font-size: 10px;">
+                                        <a href="#" style="text-decoration:none;">
+                                        <span class="author ng-binding" ng-click="UserPage(faq.ask.authorid)">
+                                             <img class="img-rounded" style="width: 20px;height: 20px"
+                                                  ng-src="../images/panelLogo.jpg" src="../images/panelLogo.jpg">&nbsp;&gt;.&lt;
+                                        </span>
+                                        </a>
+                                        <span style="color:grey;">发布于 2016-06-02 16:40:09</span>
+                                        <span style="color:grey;float: right;">3个跟帖</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                        <div class="panel panel-info" style="margin-top: -10px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">String f:fs是什么意思？？</h3>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td style="font-size: 10px;">
+                                        <a href="#" style="text-decoration:none;">
+                                        <span class="author ng-binding" ng-click="UserPage(faq.ask.authorid)">
+                                             <img class="img-rounded" style="width: 20px;height: 20px"
+                                                  ng-src="../images/panelLogo.jpg" src="../images/panelLogo.jpg">&nbsp;&gt;.&lt;
+                                        </span>
+                                        </a>
+                                        <span style="color:grey;">发布于 2016-06-02 16:40:09</span>
+                                        <span style="color:grey;float: right;">3个跟帖</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="panel panel-info" style="margin-top: -10px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">为什么我用字符流复制的电影看不了</h3>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td style="font-size: 10px;">
+                                        <a href="#" style="text-decoration:none;">
+                                        <span class="author ng-binding" ng-click="UserPage(faq.ask.authorid)">
+                                             <img class="img-rounded" style="width: 20px;height: 20px"
+                                                  ng-src="../images/panelLogo.jpg" src="../images/panelLogo.jpg">&nbsp;&gt;.&lt;
+                                        </span>
+                                        </a>
+                                        <span style="color:grey;">发布于 2016-06-02 16:40:09</span>
+                                        <span style="color:grey;float: right;">3个跟帖</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="panel panel-info" style="margin-top: -10px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">为什么order by的第二个参数无效？</h3>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td style="font-size: 10px;">
+                                        <a href="#" style="text-decoration:none;">
+                                        <span class="author ng-binding" ng-click="UserPage(faq.ask.authorid)">
+                                             <img class="img-rounded" style="width: 20px;height: 20px"
+                                                  ng-src="../images/panelLogo.jpg" src="../images/panelLogo.jpg">&nbsp;&gt;.&lt;
+                                        </span>
+                                        </a>
+                                        <span style="color:grey;">发布于 2016-06-02 16:40:09</span>
+                                        <span style="color:grey;float: right;">3个跟帖</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="panel panel-info" style="margin-top: -10px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">SQL server中为性别设置一个CHECK约束老出错原因？？</h3>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td style="font-size: 10px;">
+                                        <a href="#" style="text-decoration:none;">
+                                        <span class="author ng-binding" ng-click="UserPage(faq.ask.authorid)">
+                                             <img class="img-rounded" style="width: 20px;height: 20px"
+                                                  ng-src="../images/panelLogo.jpg" src="../images/panelLogo.jpg">&nbsp;&gt;.&lt;
+                                        </span>
+                                        </a>
+                                        <span style="color:grey;">发布于 2016-06-02 16:40:09</span>
+                                        <span style="color:grey;float: right;">3个跟帖</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="panel panel-info" style="margin-top: -10px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Hashcode()和equals()的用法</h3>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td style="font-size: 10px;">
+                                        <a href="#" style="text-decoration:none;">
+                                        <span class="author ng-binding" ng-click="UserPage(faq.ask.authorid)">
+                                             <img class="img-rounded" style="width: 20px;height: 20px"
+                                                  ng-src="../images/panelLogo.jpg" src="../images/panelLogo.jpg">&nbsp;&gt;.&lt;
+                                        </span>
+                                        </a>
+                                        <span style="color:grey;">发布于 2016-06-02 16:40:09</span>
+                                        <span style="color:grey;float: right;">3个跟帖</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="panel panel-info" style="margin-top: -10px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">为什么server端的程序第一次运行可以，第二次运行就异常了？</h3>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td style="font-size: 10px;">
+                                        <a href="#" style="text-decoration:none;">
+                                        <span class="author ng-binding" ng-click="UserPage(faq.ask.authorid)">
+                                             <img class="img-rounded" style="width: 20px;height: 20px"
+                                                  ng-src="../images/panelLogo.jpg" src="../images/panelLogo.jpg">&nbsp;&gt;.&lt;
+                                        </span>
+                                        </a>
+                                        <span style="color:grey;">发布于 2016-06-02 16:40:09</span>
+                                        <span style="color:grey;float: right;">3个跟帖</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="panel panel-info" style="margin-top: -10px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">编译程序的问题</h3>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td style="font-size: 10px;">
+                                        <a href="#" style="text-decoration:none;">
+                                        <span class="author ng-binding" ng-click="UserPage(faq.ask.authorid)">
+                                             <img class="img-rounded" style="width: 20px;height: 20px"
+                                                  ng-src="../images/panelLogo.jpg" src="../images/panelLogo.jpg">&nbsp;&gt;.&lt;
+                                        </span>
+                                        </a>
+                                        <span style="color:grey;">发布于 2016-06-02 16:40:09</span>
+                                        <span style="color:grey;float: right;">3个跟帖</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="jmeter">
+                    <p><br/>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
+                </div>
+                <script>
+                    $(function () {
+                        $('#myTab li:eq(1) a').tab('show');
+                    });
+                </script>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- 底部栏 -->
+<div id="bottom" class="container-fluid">
+    <div class="baseBot-box elip" style="overflow-x:auto">
+        <div class="baseBot-vline"></div>
+        <!-- ngRepeat: page in pages -->
+        <div ng-repeat="page in pages" style="display:inline-block" class="ng-scope">
+            <a ng-href="/index.html" class="baseBot-item ng-binding" href="/index.html">网站首页</a>
+
+            <div class="baseBot-vline"></div>
+        </div><!-- end ngRepeat: page in pages -->
+        <div ng-repeat="page in pages" style="display:inline-block" class="ng-scope">
+            <a ng-href="http://www.geminno.cn//_pages/allprojects/allprojects.html" class="baseBot-item ng-binding"
+               href="http://www.geminno.cn//_pages/allprojects/allprojects.html">所有项目</a>
+
+            <div class="baseBot-vline"></div>
+        </div><!-- end ngRepeat: page in pages -->
+        <div ng-repeat="page in pages" style="display:inline-block" class="ng-scope">
+            <a ng-href="http://www.geminno.cn//_pages/courseroom/courseroom.html" class="baseBot-item ng-binding"
+               href="http://www.geminno.cn//_pages/courseroom/courseroom.html">所有课程</a>
+
+            <div class="baseBot-vline"></div>
+        </div><!-- end ngRepeat: page in pages -->
+        <div ng-repeat="page in pages" style="display:inline-block" class="ng-scope">
+            <a ng-href="" class="baseBot-item ng-binding">院校入口</a>
+
+            <div class="baseBot-vline"></div>
+        </div><!-- end ngRepeat: page in pages -->
+        <div ng-repeat="page in pages" style="display:inline-block" class="ng-scope">
+            <a ng-href="http://www.geminno.cn//_pages/static/help.html" class="baseBot-item ng-binding"
+               href="http://www.geminno.cn//_pages/static/help.html">帮助支持</a>
+
+            <div class="baseBot-vline"></div>
+        </div><!-- end ngRepeat: page in pages -->
+        <div ng-repeat="page in pages" style="display:inline-block" class="ng-scope">
+            <a ng-href="http://www.geminno.cn//_pages/static/aboutUs.html" class="baseBot-item ng-binding"
+               href="http://www.geminno.cn//_pages/static/aboutUs.html">联系我们</a>
+
+            <div class="baseBot-vline"></div>
+        </div><!-- end ngRepeat: page in pages -->
+        <div style="display:inline-block" ng-show="$root.baseTopCtrlr.user.id==1" class="ng-hide">
+            <a ng-href="http://www.geminno.cn//_pages/admin/admin.html" class="baseBot-item"
+               href="http://www.geminno.cn//_pages/admin/admin.html">后台管理</a>
+
+            <div class="baseBot-vline"></div>
+        </div>
+        <br style="font-size: 14px; display: inline; line-height: 1px;">
+
+        <div class="baseBot-hline"></div>
+        <div class="baseBot-txt">
+            <a href="http://www.miitbeian.gov.cn" target="_blank" style="color:#888">苏ICP备14053823号-1</a>
+            <span style="margin-left:24px">本站点所有权归属于苏州高博应诺 / 由项目工场（原杰米诺）团队提供综合支持</span>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(".main .year .list").each(function (e, target) {
+        var $target = $(target),
+                $ul = $target.find("ul");
+        $target.height($ul.outerHeight()), $ul.css("position", "absolute");
+    });
+    $(".main .year>h2>a").click(function (e) {
+        e.preventDefault();
+        $(this).parents(".year").toggleClass("closeYear");
+    });
+</script>
+
+</body>
+</html>

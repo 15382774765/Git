@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+
+<link href="http://cdn.bootcss.com/twitter-bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/flat-ui.css" rel="stylesheet">
+<link rel="shortcut icon" href="images/favicon.ico">
+<script src="http://cdn.bootcss.com/html5shiv/3.6.2/html5shiv.js"></script>
+
+<body>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- 标题 -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">请选择一个项目作为您的毕业课题开发</h4>
+            </div>
+
+            <!-- 内容 -->
+            <div class="modal-body">
+                <!-- 下拉框 搜索框 -->
+                <div class="container-fluid" style="background-color: yellow;">
+                    <div class="row">
+
+                        <!-- 下拉框 -->
+                        <div class="container">
+                            <div class="row demo-row">
+                                <div class="span3">
+                                    <select value="X-Men" class="span3" tabindex="1" name="herolist">
+                                        <option value="0">Choose hero</option>
+                                        <option value="1">Spider Man</option>
+                                        <option value="2">Wolverine</option>
+                                        <option value="3">Captain America</option>
+                                        <option value="X-Men" selected="selected">X-Men</option>
+                                        <option value="Crocodile">Crocodile</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 搜索框 -->
+                        <div class="control-group"
+                             style="position: relative; width: 200px;float:right;">
+                            <div class="controls">
+                                <div class="form-group input-group">
+                                    <input type="text" placeholder="搜索标题" class="form-control">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button"><i
+                                                        class="glyphicon glyphicon-search"></i>
+                                                </button>
+                                            </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 选择项目 -->
+                <div class="container-fluid" style="background-color: blue;">
+                    <div class="row">
+                        bbb
+                    </div>
+                </div>
+                <!-- 分页 -->
+                <div class="container-fluid" style="background-color: red;">
+                    <div class="row">
+                        ccc
+                    </div>
+                </div>
+                <!-- 导师管理 -->
+                <div class="container-fluid" style="background-color: green;">
+                    <div class="row">
+                        ddd
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-2.1.4.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>
